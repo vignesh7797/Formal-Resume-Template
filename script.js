@@ -15,10 +15,12 @@ function hideMenu(){
 document.addEventListener("click", function (e) {
   let menuBtn = document.getElementById('menu-btn');
 
-  if(e.target != menuBtn){
+  if(e.target != menuBtn && e.target.parentElement !=menuBtn){
     hideMenu();
   }
 });
+
+
 
 
 function copytoClipboard(id){
@@ -28,4 +30,14 @@ function copytoClipboard(id){
     navigator.clipboard.writeText(ele.innerText)
   }
   
+}
+
+function changeTheme() {
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    localStorage.theme = 'light';
+  } else {
+    document.documentElement.classList.remove('dark');
+    localStorage.theme = 'dark'
+  }
 }
